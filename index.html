@@ -1,61 +1,240 @@
 <!DOCTYPE html>
-<html lang="PT-BR"
+<html lang="pt-BR">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RPG TASKS</title>
+    <title>RPG Tasks</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
- 
-    <div id="Tela de Login" class="Tela Ativa">
-        <div class="Login">
-            <h1>RPG TASKS 🛡️</h1>
-            <p>Faça Login Para Começar!!</p>
+<body class="font-sans antialiased flex flex-col items-center justify-center p-4 bg-rpg-dark">
 
-            <form id="form de login">
-                <input type="text" id="Player" placeholder="Name of Player" required>
-                <input type="password" id="Senha" placeholder="sua senha" required>
-                <button type="submit">"entrar no jogo"</button>
+    <!--login screen-->
+   
+    <div id="login-screen" class="w-full max-w-md animate-fade-in"><!-- o screem faz o login ficar antes do site ou aplicativo principal-->
+        <div class="glass-panel rounded-2xl p-8">
+            <div class="text-center mb-8">
+                <i class="fa-solid fa-dragon text-5xl text-rpg-accent mb-4 drop-shadow-[0_0_15px_rgba(139,92,246,0.5)]"></i>
+                <h1 class="font-rpg text-3xl font-bold tracking-wider text-white">RPG Tasks</h1>
+                <p class="text-gray-400 text-sm mt-2">Sua jornada começa aqui</p>
+            </div>
+            <script>
+                // --- TAILWIND CONFIG ---
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            fontFamily: {
+                                rpg: ['Cinzel', 'serif'],
+                                sans: ['Inter', 'sans-serif'],
+                            },
+                            colors: {
+                                rpg: {
+                                    dark: '#0f172a',
+                                    panel: '#1e293b',
+                                    border: '#334155',
+                                    accent: '#8b5cf6',
+                                    gold: '#fbbf24',
+                                    success: '#10b981'
+                                }
+                            }
+                        }
+                    }
+                };
+            </script>
+
+            <form id="login-form" class="space-y-6">
+                <!-- Username -->
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-user text-gray-500"></i>
+                    </div>
+                    <input type="text" id="username" placeholder="Nome de Usuário" required
+                        class="input-rpg w-full pl-10 pr-4 py-3 rounded-xl bg-slate-800 text-white border border-slate-700 focus:border-rpg-accent focus:outline-none">
+                </div>
+
+                <!-- Password -->
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fa-solid fa-lock text-gray-500"></i>
+                    </div>
+                    <input type="password" id="password" placeholder="Senha" required
+                        class="input-rpg w-full pl-10 pr-4 py-3 rounded-xl bg-slate-800 text-white border border-slate-700 focus:border-rpg-accent focus:outline-none">
+                </div>
+
+                <!-- Options -->
+                <div class="flex items-center justify-between text-sm">
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <input type="checkbox" class="rounded border-gray-600 bg-rpg-dark text-rpg-accent focus:ring-rpg-accent cursor-pointer">
+                        <span class="text-gray-300">Lembrar de mim</span>
+                    </label>
+                    <a href="#" class="text-rpg-accent hover:text-purple-400 transition">Esqueceu a senha?</a>
+                </div>
+
+                <div id="login-error" class="hidden text-red-400 text-sm text-center bg-red-900/30 p-2 rounded-lg border border-red-800/50">
+                    <!-- Error message box -->
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="w-full py-3 rounded-xl font-bold text-white shadow-lg flex justify-center items-center gap-2 bg-rpg-accent hover:bg-purple-500 transition-colors">
+                    <i class="fa-solid fa-right-to-bracket"></i> Entrar na Taverna
+                </button>
+
+                <!-- Register Link -->
+                <div class="text-center text-sm text-gray-400 mt-4">
+                    Não tem uma conta? <a href="#" class="text-rpg-accent hover:text-purple-400 font-semibold">Cadastre-se</a>
+                </div>
             </form>
-            <p  id="mensagem-erro" class="erro"></p>
         </div>
     </div>
-     <header>
-        <h1>Tarefas📋</h1>
-        <div id="painel-pontos">
-            <spam>pontos: </spam>
-            <strong id="seus pontos">0</strong> 
+
+    <!-- ======================= -->
+    <!-- DASHBOARD SCREEN        -->
+    <!-- ======================= -->
+    <div id="dashboard-screen" class="hidden w-full max-w-5xl animate-fade-in flex-col gap-6">
+        
+        <!-- Header Profile & Stats -->
+        <header class="glass-panel rounded-2xl p-6 flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden bg-slate-800 border border-slate-700">
+            <!-- decorative glow -->
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-rpg-accent rounded-full mix-blend-screen filter blur-[80px] opacity-30"></div>
+            
+            <div class="flex items-center gap-4 z-10">
+                <div class="w-16 h-16 rounded-full bg-slate-900 border-2 border-rpg-accent flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(139,92,246,0.3)]">
+                    <i class="fa-solid fa-user-ninja text-gray-300"></i>
+                </div>
+                <div>
+                    <h1 class="font-rpg text-2xl font-bold text-white tracking-wide" id="user-display-name">Aventureiro</h1>
+                    <p class="text-gray-400 text-sm font-medium uppercase tracking-widest"><i class="fa-solid fa-scroll mr-1"></i> Livro de Missões</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 sm:gap-8 z-10">
+                <!-- Level -->
+                <div class="text-center bg-slate-900/50 px-6 py-3 rounded-xl border border-slate-700/50">
+                    <div class="text-gray-400 text-xs uppercase tracking-wider mb-1">Nível</div>
+                    <div class="text-3xl font-bold font-rpg text-white" id="ui-level">1</div>
+                </div>
+                <!-- XP -->
+                <div class="text-center bg-slate-900/50 px-6 py-3 rounded-xl border border-slate-700/50">
+                    <div class="text-gray-400 text-xs uppercase tracking-wider mb-1">Experiência</div>
+                    <div class="text-3xl font-bold font-rpg text-rpg-gold" id="ui-xp">0<span class="text-sm text-gray-500 ml-1">XP</span></div>
+                </div>
+                <!-- Rank -->
+                <div class="text-center bg-slate-900/50 px-6 py-3 rounded-xl border border-slate-700/50">
+                    <div class="text-gray-400 text-xs uppercase tracking-wider mb-1">Rank Atual</div>
+                    <div class="text-xl mt-2 font-bold font-rpg text-gray-400" id="ui-rank">Novato</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Left Column: Add Task -->
+            <div class="md:col-span-1 space-y-6">
+                <section class="glass-panel rounded-2xl p-6 bg-slate-800 border border-slate-700">
+                    <h2 class="font-rpg text-xl font-bold mb-4 border-b border-slate-700 pb-2 flex items-center gap-2 text-white">
+                        <i class="fa-solid fa-plus-circle text-rpg-accent"></i> Nova Missão
+                    </h2>
+                    
+                    <form id="add-task-form" class="space-y-4">
+                        <div>
+                            <label class="block text-xs text-gray-400 uppercase tracking-wider mb-1">Descrição da Tarefa</label>
+                            <input type="text" id="task-desc" placeholder="Ex: Estudar JavaScript..." required
+                                class="input-rpg w-full px-4 py-2.5 rounded-lg text-sm bg-slate-900 text-white border border-slate-700 focus:border-rpg-accent focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-gray-400 uppercase tracking-wider mb-1">Recompensa (XP)</label>
+                            <div class="relative">
+                                <input type="number" id="task-xp" placeholder="10 - 500" min="10" max="500" required
+                                    class="input-rpg w-full pl-10 pr-4 py-2.5 rounded-lg text-sm bg-slate-900 text-white border border-slate-700 focus:border-rpg-accent focus:outline-none">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-solid fa-star text-rpg-gold text-xs"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full py-2.5 rounded-lg font-bold text-white text-sm shadow-lg mt-2 bg-rpg-accent hover:bg-purple-500 transition-colors">
+                            Adicionar ao Mural
+                        </button>
+                    </form>
+                </section>
+
+                <section class="glass-panel rounded-2xl p-6 text-center bg-slate-800 border border-slate-700">
+                    <div class="text-gray-400 text-sm mb-2">Próximo Nível em</div>
+                    <div class="w-full bg-slate-900 rounded-full h-4 mb-2 overflow-hidden border border-slate-700">
+                        <div id="xp-bar" class="bg-gradient-to-r from-purple-600 to-rpg-accent h-4 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                    <div class="text-xs text-gray-500 font-mono" id="xp-progress-text">0 / 100 XP</div>
+                </section>
+            </div>
+
+            <!-- Right Column: Task List -->
+            <div class="md:col-span-2">
+                <section class="glass-panel rounded-2xl p-6 h-full flex flex-col bg-slate-800 border border-slate-700">
+                    <div class="flex justify-between items-center border-b border-slate-700 pb-2 mb-4">
+                        <h2 class="font-rpg text-xl font-bold flex items-center gap-2 text-white">
+                            <i class="fa-solid fa-list-check text-rpg-success"></i> Missões Pendentes
+                        </h2>
+                        <span id="task-count" class="bg-slate-900 text-gray-300 text-xs py-1 px-3 rounded-full border border-slate-700">0 ativas</span>
+                    </div>
+
+                    <div class="flex-grow">
+                        <!-- Empty State -->
+                        <div id="empty-state" class="flex flex-col items-center justify-center h-48 text-gray-500">
+                            <i class="fa-solid fa-dungeon text-4xl mb-3 opacity-50"></i>
+                            <p>O mural está vazio.</p>
+                            <p class="text-sm">Adicione uma nova missão para começar!</p>
+                        </div>
+
+                        <!-- Task List -->
+                        <ul id="task-list" class="space-y-3 hidden">
+                            <!-- Tasks injected here -->
+                        </ul>
+                    </div>
+                </section>
+            </div>
         </div>
-        <div>
-            <h1>Rank de XP</h1>
-            <div> nivel: <strong id="nivel">1</strong></div>
-            <div>Rank: <spam id="rank">novato</spam></div>
-    </header>
 
-    <main>
-        <section id="Criar nova tarefa🆕 "></section>
-        <h2>"Novas Tarefas📋</h2>
-        <form id="form tarefa">
-            <input type="text" id="Adicione um nome a sua tarefa" placeholder="digite a descrição da tarefa..." required>
-            <input type="number" id="Aontos da tarefa" placeholder="recompensa 50XP" min="1" required>
-            <button type="submit">Adicionar Tarefa</button>
-        </form>
-    </selection>
-    <selection id="tabela de pendentes">
-        <h3>Tarefas faltantes</h3>
-        <ul id="lista de pendentes"></ul>
-    </selection>
+        <!-- ======================= -->
+        <!-- HISTORY SECTION (NEW)   -->
+        <!-- ======================= -->
+        <section class="glass-panel rounded-2xl p-6 bg-slate-800 border border-slate-700 mt-2">
+            <div class="flex justify-between items-center border-b border-slate-700 pb-2 mb-4">
+                <h2 class="font-rpg text-xl font-bold flex items-center gap-2 text-gray-300">
+                    <i class="fa-solid fa-book-journal-whills text-gray-400"></i> Pergaminho de Lendas
+                </h2>
+                <span id="history-count" class="bg-slate-900 text-gray-400 text-xs py-1 px-3 rounded-full border border-slate-700">0 concluídas</span>
+            </div>
+
+            <div class="flex-grow">
+                <!-- Empty State do Histórico -->
+                <div id="history-empty-state" class="flex flex-col items-center justify-center py-6 text-gray-500">
+                    <i class="fa-solid fa-scroll text-3xl mb-3 opacity-30"></i>
+                    <p class="text-sm">Nenhuma missão foi registrada na história ainda.</p>
+                </div>
+
+                <!-- History List -->
+                <ul id="history-list" class="space-y-3 hidden opacity-70">
+                    <!-- Completed Tasks injected here -->
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Logout / Footer -->
+        <div class="flex justify-end mt-2">
+            <button id="btn-logout" class="text-gray-500 hover:text-white transition text-sm flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-slate-800">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair da Taverna
+            </button>
+        </div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification-container" class="fixed bottom-4 right-4 flex flex-col gap-2 z-50 pointer-events-none"></div>
     
-    <section id="Seção de tarefas">
-        <h3>"tarefas faltantes"</h3>
-        <ul id="lista de tarefas">
-            <!-- As tarefas criadas aparecerão aqui dinamicamente via JavaScript-->
-        </ul>
-    </section>
-
-</main>
-
-<script src="script.js"></script>
-
+    <!-- APENAS UMA CHAMADA DE SCRIPT AQUI -->
+    <script src="script.js"></script>
 </body>
 </html>
