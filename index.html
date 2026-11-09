@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="PT-BR"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG TASKS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+    <div id="Tela de Login" class="Tela Ativa">
+        <div class="Login">
+            <h1>RPG TASKS 🛡️</h1>
+            <p>Faça Login Para Começar!!</p>
+
+            <form id="form de login">
+                <input type="text" id="Player" placeholder="Name of Player" required>
+                <input type="password" id="Senha" placeholder="sua senha" required>
+                <button type="submit">"entrar no jogo"</button>
+            </form>
+            <p  id="mensagem-erro" class="erro"></p>
+        </div>
+    </div>
+     <header>
+        <h1>Tarefas📋</h1>
+        <div id="painel-pontos">
+            <spam>pontos: </spam>
+            <strong id="seus pontos">0</strong> 
+        </div>
+        <div>
+            <h1>Rank de XP</h1>
+            <div> nivel: <strong id="nivel">1</strong></div>
+            <div>Rank: <spam id="rank">novato</spam></div>
+    </header>
+
+    <main>
+        <section id="Criar nova tarefa🆕 "></section>
+        <h2>"Novas Tarefas📋</h2>
+        <form id="form tarefa">
+            <input type="text" id="Adicione um nome a sua tarefa" placeholder="digite a descrição da tarefa..." required>
+            <input type="number" id="Aontos da tarefa" placeholder="recompensa 50XP" min="1" required>
+            <button type="submit">Adicionar Tarefa</button>
+        </form>
+    </selection>
+    <selection id="tabela de pendentes">
+        <h3>Tarefas faltantes</h3>
+        <ul id="lista de pendentes"></ul>
+    </selection>
+    
+    <section id="Seção de tarefas">
+        <h3>"tarefas faltantes"</h3>
+        <ul id="lista de tarefas">
+            <!-- As tarefas criadas aparecerão aqui dinamicamente via JavaScript-->
+        </ul>
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
